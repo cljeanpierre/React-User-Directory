@@ -1,7 +1,7 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
 // import EmployeeTable from "./src/components/EmployeeTable"
 
 export default class App extends React.Component {
@@ -10,6 +10,11 @@ export default class App extends React.Component {
     employees: []
   }
 
+  // filter employees by age
+  handleClick = () => {
+  this.setState({ employees: this.state.employees.filter(employee => employee.dob.age) });
+  };
+
   componentDidMount() {
     axios.get("https://randomuser.me/api?results=200&nat=us")
       .then(res => {
@@ -17,8 +22,9 @@ export default class App extends React.Component {
         this.setState({ employees });
       })
   };
+  
 
-  //Map over this.state.employees and render an EmployeeTable component for each employee object
+  //Map over this.state.employees and render a component for each employee object
 
     render() {
       return(
@@ -26,6 +32,12 @@ export default class App extends React.Component {
           <h1 className="display-4 text-center">Employee Directory</h1>
           <br></br>
           <br></br>
+              
+        <button className="btn btn-primary" onClick={this.handleClick}>
+            Delete Age
+        </button>{" "}
+        <br></br>
+
         {this.state.employees.map(employee => (
           <div>
           <table className="table">
@@ -42,6 +54,7 @@ export default class App extends React.Component {
               </tr>
             </thead>
               <tbody>
+                <tr>
                 <td>{employee.name.first}</td>
                 <td>{employee.name.last}</td>
                 <td>{employee.cell}</td>
@@ -50,6 +63,7 @@ export default class App extends React.Component {
                 <td>{employee.location.state}</td>
                 <td>{employee.location.postcode}</td>
                 <td>{employee.dob.age}</td>
+                </tr>
               </tbody>
             </table>
           </div>
