@@ -1,10 +1,8 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.min.css';
 // import EmployeeTable from "./src/components/EmployeeTable"
-
-
-// import API from "./utils/API";
 
 export default class App extends React.Component {
 
@@ -21,32 +19,42 @@ export default class App extends React.Component {
   };
 
   //Map over this.state.employees and render an EmployeeTable component for each employee object
-  // function App() {
-  render() {
-    return(
-      <div>
-      {this.state.employees.map(employee => (
-        <div>
+
+    render() {
+      return(
+        <div className="jumbotron">
+          <h1 className="display-4 text-center">Employee Directory</h1>
+          <br></br>
+          <br></br>
+        {this.state.employees.map(employee => (
           <div>
-            {employee.name.first}
+          <table className="table">
+            <thead className="thead-dark">
+              <tr>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Telephone</th>
+              <th scope="col">Email Address</th>
+              <th scope="col">City</th>
+              <th scope="col">State</th>
+              <th scope="col">Zip Code</th>
+              <th scope="col">Age</th>
+              </tr>
+            </thead>
+              <tbody>
+                <td>{employee.name.first}</td>
+                <td>{employee.name.last}</td>
+                <td>{employee.cell}</td>
+                <td>{employee.email}</td>
+                <td>{employee.location.city}</td>
+                <td>{employee.location.state}</td>
+                <td>{employee.location.postcode}</td>
+                <td>{employee.dob.age}</td>
+              </tbody>
+            </table>
           </div>
-          <div>
-            {employee.name.last}
-          </div>
-          <div>
-            {employee.telephone}
-          </div>
-          <div>
-            {employee.email}
-          </div>
-          <div>
-            {employee.dob.age}
-          </div>
+        ))}
         </div>
-      ))}
-      </div>
-    )  
- 
-  
-  }
+      )  
+    }
 }
