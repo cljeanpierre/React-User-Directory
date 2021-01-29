@@ -1,18 +1,21 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
-// import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
-// import EmployeeTable from "./src/components/EmployeeTable"
+import FilterBox from "../src/components/FilterBox"
+
 
 export default class App extends React.Component {
 
   state = {
-    employees: []
+    employees: [],
+    searchEmployee: ""
   }
 
   // filter employees by age
-  handleClick = () => {
-  this.setState({ employees: this.state.employees.filter(employee => employee.dob.age) });
+  handleInput = (e) => {
+    console.log (e.target.value);
+    this.setState({searchEmployee: e.target.value})
+  // this.setState({ employees: this.state.employees.filter(employee => employee.dob.age) });
   };
 
   componentDidMount() {
@@ -23,27 +26,28 @@ export default class App extends React.Component {
       })
   };
   
-
+    filterEmployee = age => {
+      const employees = this.state.employees.filter(employee => employee.dob.age === this.state.handleInput);
+      this.setState({employees});
+    }
+ 
   //Map over this.state.employees and render a component for each employee object
 
     render() {
+
       return(
         <div className="jumbotron">
           <h1 className="display-4 text-center">Employee Directory</h1>
           <br></br>
           <br></br>
-              
-        <button className="btn btn-primary" onClick={this.handleClick}>
-            Delete Age
-        </button>{" "}
+        <FilterBox handleInput = {this.handleInput} />    
         <br></br>
-
         {this.state.employees.map(employee => (
           <div>
           <table className="table">
             <thead className="thead-dark">
               <tr>
-              <th scope="col">First Name</th>
+              <th scope="col First Name">First Name</th>
               <th scope="col">Last Name</th>
               <th scope="col">Telephone</th>
               <th scope="col">Email Address</th>
