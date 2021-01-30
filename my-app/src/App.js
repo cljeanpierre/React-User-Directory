@@ -8,7 +8,9 @@ export default class App extends React.Component {
 
   state = {
     employees: [],
-    searchEmployee: ""
+    filteredEmployees: [],
+    filterValue: "",
+    isFiltered: false,
   }
 
 
@@ -21,12 +23,6 @@ export default class App extends React.Component {
       })
   };
   
-    // filterEmployee = age => {
-    //   const employees = this.state.employees.filter(employee => employee.dob.age === this.state.handleInput);
-    //   this.setState({employees});
-    // }
-
-
   // Store user filter input in React state
   handleInput = e => {
     console.log (e.target.value);
