@@ -10,6 +10,8 @@ export default class App extends React.Component {
     employees: [],
     filteredEmployees: [],
     filterValue: "",
+    sortCategory: "",
+    isSorted: false,
     isFiltered: false,
   }
 
@@ -48,6 +50,18 @@ export default class App extends React.Component {
     }
   }
 
+  handleSort = (category) => {
+    //category will be 'age'
+    return this.setState({
+      isSorted: true, 
+      filterValue: '',
+      isFiltered: false,
+      filteredEmployees: [],
+      sortCategory: category,
+      employees: this.state.employees.sort((a, b) => +a.dob.age - +b.dob.age),
+    })
+  };
+
   //Map over this.state.employees and render a component for each employee object
 
     render() {
@@ -81,7 +95,7 @@ export default class App extends React.Component {
               <th scope="col">City</th>
               <th scope="col">State</th>
               <th scope="col">Zip Code</th>
-              <th scope="col">Age</th>
+              <th scope="col" onClick={() => this.handleSort('age')}>Age</th>
               </tr>
             </thead>
               <tbody>
