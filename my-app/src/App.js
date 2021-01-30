@@ -26,11 +26,29 @@ export default class App extends React.Component {
       })
   };
   
-    filterEmployee = age => {
-      const employees = this.state.employees.filter(employee => employee.dob.age === this.state.handleInput);
-      this.setState({employees});
+    // filterEmployee = age => {
+    //   const employees = this.state.employees.filter(employee => employee.dob.age === this.state.handleInput);
+    //   this.setState({employees});
+    // }
+    
+  //Handle submission of the user's filter
+  submitFilter = () => {
+    // If the user has entered a filter, apply it.
+    if (this.state.filterValue.length) {
+      return this.setState({
+        isFiltered: true,
+        filteredEmployees: this.state.employees.filter(employee => {
+          return +employee.dob.age === +this.state.filterValue;
+        })
+      })
+    // If the user clears the filter, or it is already empty, reset the filtered tool
+    } else {
+      return this.setState({
+        isFiltered: false,
+      })
     }
- 
+  }
+
   //Map over this.state.employees and render a component for each employee object
 
     render() {
