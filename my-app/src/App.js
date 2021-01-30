@@ -55,13 +55,18 @@ export default class App extends React.Component {
   //Map over this.state.employees and render a component for each employee object
 
     render() {
+      // const stateKeyToRender = this.state.isFiltered ? 'filteredEmployees' : 'employees'
 
       return(
         <div className="jumbotron">
           <h1 className="display-4 text-center">Employee Directory</h1>
           <br></br>
           <br></br>
-        <FilterBox handleInput = {this.handleInput} />    
+        <FilterBox 
+          filterValue = {this.state.filterValue}
+          handleInput = {this.handleInput}
+          submitFilter = {this.submitFilter} 
+        />    
         <br></br>
         {this.state.employees.map(employee => (
           <div>
