@@ -11,12 +11,7 @@ export default class App extends React.Component {
     searchEmployee: ""
   }
 
-  // filter employees by age
-  handleInput = (e) => {
-    console.log (e.target.value);
-    this.setState({searchEmployee: e.target.value})
-  // this.setState({ employees: this.state.employees.filter(employee => employee.dob.age) });
-  };
+
 
   componentDidMount() {
     axios.get("https://randomuser.me/api?results=200&nat=us")
@@ -30,7 +25,15 @@ export default class App extends React.Component {
     //   const employees = this.state.employees.filter(employee => employee.dob.age === this.state.handleInput);
     //   this.setState({employees});
     // }
-    
+
+
+  // Store user filter input in React state
+  handleInput = e => {
+    console.log (e.target.value);
+    this.setState({filterValue: e.target.value});
+  }
+
+
   //Handle submission of the user's filter
   submitFilter = () => {
     // If the user has entered a filter, apply it.
