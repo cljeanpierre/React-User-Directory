@@ -5,9 +5,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function FilterBox(props) {
     return (
         <div>
-            <span>Filter Age</span>
+            <span>Age</span>
             <br></br>
-            <input onChange = {props.handleInput} type = "text" />
+            <input onChange = {props.handleInput} value = {props.filerValue} type = "text" />
+            <button onClick = {props.submitFilter}>
+                Filter By Age
+            </button>
         </div>
     )
 }
