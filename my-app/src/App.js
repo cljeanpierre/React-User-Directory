@@ -52,6 +52,12 @@ export default class App extends React.Component {
 
     render() {
       // const stateKeyToRender = this.state.isFiltered ? 'filteredEmployees' : 'employees'
+      let stateKeyToRender; 
+      if (this.state.isFiltered) {
+        stateKeyToRender = 'filteredEmployees';
+      } else {
+        stateKeyToRender = 'employees';
+      };
 
       return(
         <div className="jumbotron">
@@ -64,7 +70,6 @@ export default class App extends React.Component {
           submitFilter = {this.submitFilter} 
         />    
         <br></br>
-        {this.state.employees.map(employee => (
           <div>
           <table className="table">
             <thead className="thead-dark">
@@ -80,20 +85,25 @@ export default class App extends React.Component {
               </tr>
             </thead>
               <tbody>
-                <tr>
-                <td>{employee.name.first}</td>
-                <td>{employee.name.last}</td>
-                <td>{employee.cell}</td>
-                <td>{employee.email}</td>
-                <td>{employee.location.city}</td>
-                <td>{employee.location.state}</td>
-                <td>{employee.location.postcode}</td>
-                <td>{employee.dob.age}</td>
-                </tr>
+                {this.state[stateKeyToRender].map(employee => {
+                  return (
+                    <tr>
+                    <td>{employee.name.first}</td>
+                    <td>{employee.name.last}</td>
+                    <td>{employee.cell}</td>
+                    <td>{employee.email}</td>
+                    <td>{employee.location.city}</td>
+                    <td>{employee.location.state}</td>
+                    <td>{employee.location.postcode}</td>
+                    <td>{employee.dob.age}</td>
+                    </tr>
+                  )
+                }
+                )}
               </tbody>
             </table>
           </div>
-        ))}
+        ))
         </div>
       )  
     }
